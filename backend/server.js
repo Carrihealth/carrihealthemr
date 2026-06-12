@@ -69,8 +69,8 @@ const fs = require('fs');
 const publicDir = path.join(__dirname, 'public');
 if (fs.existsSync(publicDir)) {
   app.use(express.static(publicDir));
-  // SPA fallback — let React Router handle all non-API routes
-  app.get('*', (req, res) => res.sendFile(path.join(publicDir, 'index.html')));
+  // SPA fallback — RegExp avoids Express 5 / path-to-regexp v8 named-wildcard requirement
+  app.get(/.*/, (req, res) => res.sendFile(path.join(publicDir, 'index.html')));
 }
 
 // Global error handler
