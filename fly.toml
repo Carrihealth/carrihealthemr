@@ -1,13 +1,15 @@
-# fly.toml app configuration file generated for carrihealth-lightweight-emr on 2026-06-12T09:02:30+01:00
+# fly.toml app configuration file generated for carrihealthemr on 2026-06-12T08:25:49Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'carrihealth-lightweight-emr'
+app = 'carrihealthemr'
 primary_region = 'lhr'
 
+[build]
+
 [env]
-  NODE_ENV = "production"
+  NODE_ENV = 'production'
 
 [http_service]
   internal_port = 8080
@@ -21,3 +23,4 @@ primary_region = 'lhr'
   memory = '2gb'
   cpu_kind = 'shared'
   cpus = 1
+  memory_mb = 2048
