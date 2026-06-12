@@ -64,6 +64,15 @@ app.use('/api/reports',       reportsRoutes);
 app.use('/api/export',        exportRoutes);
 app.use('/api/users',         userRoutes);
 
+// Serve built React frontend (only present after Docker build)
+const fs = require('fs');
+const publicDir = path.join(__dirname, 'public');
+if (fs.existsSync(publicDir)) {
+  app.use(express.static(publicDir));
+  // SPA fallback — let React Router handle all non-API routes
+  app.get('*', (req, res) => res.sendFile(path.join(publicDir, 'index.html')));
+}
+
 // Global error handler
 app.use((err, req, res, next) => {
   const status = err.status || err.statusCode || 500;
